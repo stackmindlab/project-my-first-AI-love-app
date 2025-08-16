@@ -126,6 +126,13 @@ body::after { right:-10vmax; bottom:-8vmax; animation-delay: -9s; }
 }
 .btn:hover{ transform: translateZ(30px) translateY(-1px) }
 
+/* Mobile tap optimizations */
+#noBtn, #yesBtn {
+  touch-action: manipulation;          /* removes 300ms delay on taps */
+  -webkit-tap-highlight-color: transparent; /* removes gray tap highlight */
+}
+
+
 /* pulse */
 .pulse{ animation:pulse 1.8s ease-in-out infinite }
 @keyframes pulse{
