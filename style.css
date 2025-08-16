@@ -1,0 +1,183 @@
+:root{
+  --bg-1:#080612;
+  --bg-2:#120b2a;
+  --glass: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.16);
+  --text:#eef2ff;
+  --muted:#a7b0d6;
+  --yes-1:#9bffb2;   /* mint */
+  --yes-2:#48e2a4;
+  --no-1:#ff5a8b;    /* pink */
+  --no-2:#ff2e62;
+  --glow: 0 24px 80px rgba(156,120,255,.28);
+  --glow-yes: 0 16px 44px rgba(72,226,164,.5);
+  --glow-no:  0 16px 44px rgba(255,46,98,.5);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 800px at 80% -20%, #2a1b67 0%, transparent 60%),
+    conic-gradient(from 200deg at 20% -10%, #1b0b3a, #0c0926, #1b0b3a),
+    linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  overflow-x:hidden;
+}
+
+/* animated background blobs */
+body::before, body::after{
+  content:"";
+  position:fixed; inset:auto;
+  width:42vmax; height:42vmax; border-radius:50%;
+  background: radial-gradient(closest-side, rgba(164,176,255,.18), transparent 70%);
+  filter: blur(20px);
+  z-index:-2; opacity:.9;
+  animation: blob 18s ease-in-out infinite;
+}
+body::before{ left:-12vmax; top:-8vmax; }
+body::after { right:-10vmax; bottom:-8vmax; animation-delay: -9s; }
+@keyframes blob{
+  0%,100%{ transform: translate(0,0) scale(1) }
+  50%{ transform: translate(6vmax,-3vmax) scale(1.15) }
+}
+
+/* layout */
+.wrap{
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
+
+/* glassy card + shimmer */
+.card{
+  width:min(760px, 94vw);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:28px 22px 32px;
+  text-align:center;
+  box-shadow: var(--glow);
+  backdrop-filter: blur(14px);
+  transform-style: preserve-3d;
+  transition: transform .2s ease, box-shadow .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.card::after{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(120deg, transparent 0 30%, rgba(255,255,255,.06) 45%, transparent 60% 100%);
+  transform: translateX(-100%);
+  animation: shimmer 5.5s linear infinite;
+}
+@keyframes shimmer{ to{ transform: translateX(100%)} }
+
+.media{
+  width:min(340px, 74vw);
+  height:auto; object-fit:contain;
+  border-radius:16px;
+  margin-bottom:12px;
+  animation: float 4.5s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{ transform: translateY(0) }
+  50%{ transform: translateY(-8px) }
+}
+
+/* animated gradient headline */
+.headline span{
+  background: linear-gradient(90deg,#a4b0ff, #caa8ff, #9bf6ff, #a4b0ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hue 9s linear infinite;
+  font-weight:800;
+  font-size: clamp(1.3rem, 4.6vw, 2.4rem);
+  letter-spacing:.2px;
+}
+@keyframes hue{ 0%{filter:hue-rotate(0)} 100%{filter:hue-rotate(360deg)} }
+
+.sub{ font-size:1.7rem; transform: translateZ(20px); }
+.muted{ color:var(--muted); margin:8px 0 18px; }
+
+/* buttons */
+.buttons{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position: relative; z-index: 20;}
+.btn{
+  appearance:none; border:2px solid transparent;
+  padding:14px 28px; border-radius:999px;
+  font-weight:800; letter-spacing:.3px; cursor:pointer;
+  user-select:none; position:relative; overflow:hidden;
+  transform: translateZ(30px);
+  transition: transform .1s ease, box-shadow .25s ease, opacity .2s ease, background .2s ease;
+}
+.btn:active{ transform: translateZ(30px) translateY(0) scale(.98) }
+
+.btn.yes{
+  color:#061b12;
+  background: linear-gradient(180deg, var(--yes-1), var(--yes-2));
+  box-shadow: var(--glow-yes);
+}
+.btn.no{
+  color:#fff;
+  background: linear-gradient(180deg, var(--no-1), var(--no-2));
+  box-shadow: var(--glow-no);
+}
+.btn:hover{ transform: translateZ(30px) translateY(-1px) }
+
+/* pulse */
+.pulse{ animation:pulse 1.8s ease-in-out infinite }
+@keyframes pulse{
+  0%,100%{ box-shadow: var(--glow-yes) }
+  50%{ box-shadow: 0 0 52px rgba(72,226,164,.6) }
+}
+
+/* ripple effect */
+.btn .ripple{
+  position:absolute; border-radius:50%;
+  width:12px;height:12px; background:rgba(255,255,255,.6);
+  transform: translate(-50%,-50%) scale(1);
+  animation:ripple .65s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes ripple{ to{ opacity:0; transform: translate(-50%,-50%) scale(22) } }
+
+/* progress dots */
+.dots{ display:flex; gap:10px; margin-top:10px; justify-content:center }
+.dots .dot{
+  width:8px; height:8px; border-radius:50%;
+  background:#c3c9ff33; transform: scale(.9); opacity:.85;
+  transition: transform .2s ease, background .2s ease;
+}
+.dots .dot.active{ background:#c3c9ff; transform: scale(1.25); }
+
+/* hearts (already in your HTML) */
+#hearts{ position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:-1 }
+.heart{
+  position:absolute; top:100%;
+  font-size:18px; opacity:.85;
+  animation: rise linear forwards;
+}
+@keyframes rise{ to{ transform:translateY(-120vh) rotate(360deg); opacity:.95 } }
+
+/* confetti (on YES) */
+.confetti{
+  position: fixed;
+  top: -10vh;
+  left: 0;
+  font-size: 24px;
+  pointer-events: none;
+  z-index: 60;                 /* above the card/buttons */
+  animation: confettiFall 3s linear forwards;
+}
+@keyframes confettiFall{
+  to { transform: translateY(120vh) rotate(360deg); opacity: .95; }
+}
+
+/* keep buttons on top, so NO never “disappears” behind stuff */
+.buttons { position: relative; z-index: 50; }
+
+
+/* mobile */
+@media (max-width:420px){ .buttons{gap:12px} }

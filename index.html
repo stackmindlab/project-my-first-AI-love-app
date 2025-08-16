@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>¿Me perdonas? — Neon Glass</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- soft particles / hearts -->
+  <div id="hearts"></div>
+
+  <main class="wrap" role="main" aria-live="polite">
+    <section class="card">
+      <!-- This will change to a random cat/puppy GIF -->
+      <img id="kitty" class="media" alt="cute animal" />
+
+      <!-- This will change each question -->
+      <h1 class="headline"><span id="title">¿Me perdonas?</span></h1>
+      
+      <!-- This will show a matching emoji -->
+      <div id="emoji" class="sub">🥺</div>
+      
+      <!-- This will show small text under the title -->
+      <p id="subtitle" class="muted"></p>
+
+      <!-- Yes / No buttons -->
+      <div class="buttons">
+        <button id="yesBtn" class="btn yes pulse" aria-label="Sí">SÍ</button>
+        <button id="noBtn"  class="btn no" aria-label="No">NO</button>
+      </div>
+
+      <!-- Question progress dots -->
+      <div id="progress" class="dots" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <!-- success screen template -->
+  <template id="successTpl">
+    <section class="card">
+      <img class="media" src="https://media.tenor.com/2x0w8Xk3X7gAAAAi/cute-cat-kiss.gif" alt="celebration">
+      <h1 class="headline"><span>¡GRACIAS POR DECIR QUE SÍ! ✨</span></h1>
+      <div class="sub">🥰</div>
+      <p class="muted" id="successSubtitle"></p>
+      <div class="buttons">
+        <button class="btn yes" onclick="location.search=''">Volver al inicio</button>
+      </div>
+    </section>
+  </template>
+
+  <!-- Your main script -->
+  <script src="script.js" defer></script>
+</body>
+</html>
