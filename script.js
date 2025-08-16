@@ -287,10 +287,26 @@ function confetti(){
 // Wire events + first paint
 // =====================
 yesBtn.addEventListener("click", onYesClick);
-noBtn.addEventListener("click", onNoClick);
+
+// Desktop (hover/move = dodge, click = next step)
+noBtn.addEventListener("click", (e) => {
+  if (!dodgeEnabled) onNoClick(e);
+});
 noBtn.addEventListener("mouseenter", playfulDodge);
 noBtn.addEventListener("mousemove", playfulDodge);
-noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); playfulDodge(); });
+
+// Mobile & tablets
+noBtn.addEventListener("touchstart", (e) => {
+  if (dodgeEnabled) {
+    e.preventDefault(); // cancel tap only when dodging
+    playfulDodge();
+  }
+}, { passive: false });
+
+noBtn.addEventListener("touchend", (e) => {
+  if (!dodgeEnabled) onNoClick(e);
+});
 
 setUIByLang();
 render();
+
