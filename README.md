@@ -1,6 +1,6 @@
 # 💖 Project: My First AI Love App
 
-👉 [Live Demo](https://yourusername.github.io/project-my-first-AI-love-app/) 👈
+👉 [Live Demo](https://stackmindlab.github.io/project-my-first-AI-love-app/?) 👈
 
 A small love themed web app co-created with AI + my own ideas.  
 It’s built with HTML, CSS, and JavaScript and designed to make someone smile, feel special, and maybe even call or text you. ✨
@@ -82,7 +82,7 @@ project-my-first-AI-love-app/
 
 ## 📸 Screenshots   
 
-- 👉 [Live Demo](https://yourusername.github.io/project-my-first-AI-love-app/)
+- 👉 [Live Demo](https://stackmindlab.github.io/project-my-first-AI-love-app/?)
 - (In progress )Add screenshots or GIF previews once the app is hosted online.
 
 ---
